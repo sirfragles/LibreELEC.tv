@@ -4,9 +4,9 @@ on:
     inputs:
       le_periodic_version:
         description: "Version and Perodic builds"
-        default: nightly
+        default: official
         required: true
-        type: official
+        type: choice
         options:
           - nightly
           - official
@@ -17,18 +17,32 @@ on:
         type: string
       target:
         description: "targets to build"
-        # The default should be one of the remaining options or you can keep 'all' 
-        # but the list of options is now restricted.
-        default: Generic.x86_64
+        default: all
         required: true
         type: choice
         options:
-          # Only x86/x64 targets remaining
+          - all
+          - A64.aarch64
+          - H3.arm
+          - H5.aarch64
+          - H6.aarch64
+          - R40.arm
+          - AMLGX.aarch64
           - Generic.x86_64
           - Generic-legacy.x86_64
-          # You might include 'all' if the job logic handles it, but for a 
-          # strictly x86/x64 focused build, it's better to restrict the options.
-          # - all 
+          - iMX6.arm
+          - iMX8.aarch64
+          - Dragonboard.aarch64
+          - RK3288.arm
+          - RK3328.aarch64
+          - RK3399.aarch64
+          - RPi2.arm
+          - RPi4.aarch64
+          - RPi5.aarch64
+          - Exynos.arm
+  schedule:
+    # The times are specified in UTC
+    - cron: "15 14 * * *"
 
 env:
   clean_le: no_clean_le
